@@ -21,10 +21,12 @@ change_room = (new_room) ->
   client.unsubscribe("/#{room}")
   easy_subscribe("#{new_room}")
   room = new_room
+  $('#room')[0].innerHTML = room
 
 easy_subscribe = (room) ->
   client.subscribe("/#{room}", (message) ->
-    alert(message)
+    prepending = $("<li>#{message}</li>").hide();
+    prepending.prependTo('#messages').slideDown();
   )
 
 sendmessage = (channel, message) ->
@@ -39,3 +41,13 @@ addmessage = (message) ->
 sendmessage('/general', 'Someone else is now viewing this page!')
 
 easy_subscribe(room)
+
+$(document).ready ->
+  $('#room_tag').bind 'blur', ->
+    change_room(this.value);
+
+$(document).ready ->
+  $('#message_form').bind 'submit', ->
+    addmessage($('#message')[0].value)
+    $('#message')[0].value = ''
+    return false

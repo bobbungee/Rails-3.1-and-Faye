@@ -1,3 +1,8 @@
 You're in room: <span id='room'>general</span>
 <%= tag :br %>
-<%= text_field_tag :room_tag, 'general' %>
+Change room to: <%= text_field_tag :room_tag, 'general' %>
+<%= tag :br %>
+Send message: <%= form_tag({:action => :send_message}, :id => 'message_form') do %><%= text_field_tag :message %><% end %>
+<%= tag :br %>
+<ul id='messages'>
+</ul>
