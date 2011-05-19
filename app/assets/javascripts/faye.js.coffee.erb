@@ -1,12 +1,30 @@
 # init client
 client = new Faye.Client('<%= FAYE_URI.to_s %>')
 
+# Logging
+Logger = {
+  incoming: (message, callback) ->
+    console.log('incoming', message);
+    callback(message);
+  ,
+  outgoing: (message, callback) ->
+    console.log('outgoing', message)
+    callback(message)
+  
+}
+
+client.addExtension(Logger);
+
 # subscribe to #general
 client.subscribe('/general', (message) ->
-  alert(message.text)
+  alert(message)
 )
 
-# send something
-client.publish('/general', {
-  text: 'I just logged on'
-})
+sendmessage = (channel, message) ->
+  $.ajax({
+    url: "/home/message#{channel}?message=#{message}",
+    type: "POST"
+  })
+
+
+sendmessage('/general', 'Someone else is now viewing this page!')
