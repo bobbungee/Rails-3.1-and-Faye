@@ -1,5 +1,6 @@
 require 'faye'
-require './settings'
+file_root = File.dirname(__FILE__)
+require "#{file_root}/settings"
 
 class ServerAuth
   def incoming(message, callback)

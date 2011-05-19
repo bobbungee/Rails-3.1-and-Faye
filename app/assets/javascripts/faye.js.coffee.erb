@@ -15,10 +15,17 @@ Logger = {
 
 client.addExtension(Logger);
 
-# subscribe to #general
-client.subscribe('/general', (message) ->
-  alert(message)
-)
+room = 'general'
+
+change_room = (new_room) ->
+  client.unsubscribe("/#{room}")
+  easy_subscribe("#{new_room}")
+  room = new_room
+
+easy_subscribe = (room) ->
+  client.subscribe("/#{room}", (message) ->
+    alert(message)
+  )
 
 sendmessage = (channel, message) ->
   $.ajax({
@@ -26,5 +33,9 @@ sendmessage = (channel, message) ->
     type: "POST"
   })
 
+addmessage = (message) ->
+  sendmessage("/#{room}", message)
 
 sendmessage('/general', 'Someone else is now viewing this page!')
+
+easy_subscribe(room)
