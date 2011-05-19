@@ -1,5 +1,5 @@
 # init client
-client = new Faye.Client('http://localhost:9292/faye')
+client = new Faye.Client('<%= FAYE_URI.to_s %>')
 
 # subscribe to #general
 client.subscribe('/general', (message) ->
