@@ -1,0 +1,5 @@
+Faye must be ran in production mode on thin, to start Faye, run: rackup faye/config.ru -s thin -E production
+Faye will now be running on 0.0.0.0:9292 mounted to /faye
+
+start the rails server with: rails server
+and navigate to home/index for demos
