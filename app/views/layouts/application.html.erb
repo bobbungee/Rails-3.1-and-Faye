@@ -3,7 +3,7 @@
 <head>
   <title>Fayetest</title>
   <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "http://localhost:9292/faye.js" %>
+  <%= javascript_include_tag "http://#{local_ip}:9292/faye.js" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
